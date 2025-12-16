@@ -43,4 +43,54 @@
 
 
 # ขั้นตอนการสร้าง Frontend/
+
+## 1.src/main.tsx
+React start here
+
+## 2.src/App.tsx
+
+## 3.src/components/Layout.tsx
+layoutพื้นฐานต่างๆ
+
+- add a max-width container
+- change header style
+- add padding / spacing rules -once for all pages
+
+## 4.src/index.css + Tailwind
+
+## 5.src/pages/HotelListPage.tsx
+fetchHotels() loads data
+
+## 6.src/components/HotelCard.tsx
+Structure:
+
+image (hotel-image)
+info block (hotel-info)
+link button (btn-primary)
+
+- hover animation (scale/shadow)
+- nicer typography hierarchy
+- price/rating badges
+
+## 7.src/pages/HotelDetailPage.tsx
+
+- Gets hotelId from the URL
+- Chooses Variant A or B and stores it in localStorage per hotel
+- Logs events (view_hotel, click_book_now)
+- Renders BookNowButton with variant
+
+## 8.src/components/BookNowButton.tsx
+- stronger CTA for B (green, bigger, glow, shake, etc.)
+- icon
+- animated pulse (framer-motion is installed if you want)
+
+## 9.src/pages/AdminDashboardPage.tsx
+
+เราสามารถเเต่งให้tableสวยกว่านี้:
+- rounded container card
+- striped rows
+- sticky header
+
+
+## Run frontend/
     npm run dev

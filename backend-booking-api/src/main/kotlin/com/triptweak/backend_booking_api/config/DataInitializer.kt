@@ -40,6 +40,13 @@ class DataInitializer(
                 pricePerNight = 150.0,
                 rating = 4.7,
                 imageUrl = "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg"
+            ),
+            Hotel(
+            name = "Ayutthaya Heritage Hotel",
+            city = "Ayutthaya",
+            pricePerNight = 95.0,
+            rating = 4.4,
+            imageUrl = "https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg"
             )
         )
 
