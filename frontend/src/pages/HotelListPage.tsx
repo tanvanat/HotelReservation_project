@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchHotels } from "../services/apiClient";
 import { Hotel } from "../types/models";
 import HotelCard from "../components/HotelCard";
+import { HotelGalleryTabs } from "../components/HotelGalleryTabs";
 
 const HotelListPage: React.FC = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
@@ -80,7 +81,10 @@ const HotelListPage: React.FC = () => {
         </form>
       </div>
 
-      {/* ✅ Hotel grid */}
+      <p className="subtitle">96% guest satisfaction with 52,000+ nights booked</p>
+      <HotelGalleryTabs hotels={filteredHotels} />
+
+      {/* ✅ Hotel grid
       <div className="hotel-grid">
         {filteredHotels.length === 0 ? (
           <p className="error" style={{ color: "#6b7280" }}>
@@ -91,7 +95,7 @@ const HotelListPage: React.FC = () => {
             <HotelCard key={hotel.id} hotel={hotel} />
           ))
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
