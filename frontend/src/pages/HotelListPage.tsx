@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { fetchHotels } from "../services/apiClient";
 import { Hotel } from "../types/models";
-import HotelCard from "../components/HotelCard";
 import { HotelGalleryTabs } from "../components/HotelGalleryTabs";
 
 const HotelListPage: React.FC = () => {
@@ -21,81 +20,75 @@ const HotelListPage: React.FC = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const filteredHotels = hotels.filter((hotel) => {
+  const filteredHotels = useMemo(() => {
     const keyword = search.trim().toLowerCase();
-    if (!keyword) return true;
-
-    return (
-      hotel.name.toLowerCase().includes(keyword) ||
-      hotel.city.toLowerCase().includes(keyword)
+    if (!keyword) return hotels;
+    return hotels.filter(
+      (h) =>
+        h.name.toLowerCase().includes(keyword) ||
+        h.city.toLowerCase().includes(keyword)
     );
-  });
+  }, [hotels, search]);
 
   if (loading) return <p>Loading hotels...</p>;
   if (error) return <p className="error">{error}</p>;
 
   return (
     <div>
-      <h1>Available Hotels</h1>
-      <p className="subtitle">
-        This list simulates Agoda-style search results. Click one to see the
-        experiment in action.
-      </p>
+      {/* ✅ ทำให้ทุกอย่างอยู่กลางเหมือน search bar */}
+      <div className="text-center">
+        <h1>Available Hotels</h1>
+        <p className="subtitle">
+          This list simulates Agoda-style search results. Click one to see the
+          experiment in action.
+        </p>
 
-      {/* ✅ Search bar (ใช้ class จาก index.css) */}
-      <div className="search-wrap">
-        <form
-          className="search-form"
-          onSubmit={(e) => e.preventDefault()}
-          role="search"
-        >
-          <label htmlFor="search" className="sr-only">
-            Search
-          </label>
-
-          <div className="search-box">
-            <span className="search-icon" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
-
-            <input
-              type="search"
-              id="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search hotel or city"
-              className="search-input"
-            />
-
-            <button type="button" className="search-btn">
+        {/* Search bar */}
+        <div className="search-wrap">
+          <form
+            className="search-form"
+            onSubmit={(e) => e.preventDefault()}
+            role="search"
+          >
+            <label htmlFor="search" className="sr-only">
               Search
-            </button>
-          </div>
-        </form>
+            </label>
+
+            <div className="search-box">
+              <span className="search-icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
+
+              <input
+                type="search"
+                id="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search hotel or city"
+                className="search-input"
+              />
+
+              <button type="button" className="search-btn">
+                Search
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <p className="subtitle">
+          96% guest satisfaction with 52,000+ nights booked
+        </p>
       </div>
 
-      <p className="subtitle">96% guest satisfaction with 52,000+ nights booked</p>
+      {/* ✅ ส่ง hotels เข้า tabs */}
       <HotelGalleryTabs hotels={filteredHotels} />
-
-      {/* ✅ Hotel grid
-      <div className="hotel-grid">
-        {filteredHotels.length === 0 ? (
-          <p className="error" style={{ color: "#6b7280" }}>
-            No hotels found
-          </p>
-        ) : (
-          filteredHotels.map((hotel) => (
-            <HotelCard key={hotel.id} hotel={hotel} />
-          ))
-        )}
-      </div> */}
     </div>
   );
 };

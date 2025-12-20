@@ -24,7 +24,7 @@ export async function postEvent(payload: EventPayload): Promise<void> {
   const res = await fetch(`${API_BASE_URL}/api/events`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   });
 
   if (!res.ok) {
@@ -36,4 +36,21 @@ export async function postEvent(payload: EventPayload): Promise<void> {
 export async function fetchMetrics(): Promise<VariantMetrics[]> {
   const res = await fetch(`${API_BASE_URL}/api/metrics`);
   return handleResponse<VariantMetrics[]>(res);
+}
+
+/* =========================================================
+   ✅ Aliases (กัน error: no exported member 'trackClick/createBooking')
+   ========================================================= */
+
+export async function trackClick(payload: Omit<EventPayload, "eventType">) {
+  return postEvent({ ...payload, eventType: "click_book" });
+}
+
+export async function trackView(payload: Omit<EventPayload, "eventType">) {
+  return postEvent({ ...payload, eventType: "view_hotel" });
+}
+
+// ในโปรเจกต์นี้ยังไม่มี /api/bookings → ให้ createBooking = click_book
+export async function createBooking(payload: Omit<EventPayload, "eventType">) {
+  return postEvent({ ...payload, eventType: "click_book" });
 }
