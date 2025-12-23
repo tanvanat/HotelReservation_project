@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { fetchHotels } from "../services/apiClient";
 import { Hotel } from "../types/models";
 import { HotelGalleryTabs } from "../components/HotelGalleryTabs";
+import HotelCard from "../components/HotelCard";
 
 const HotelListPage: React.FC = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
@@ -88,7 +89,13 @@ const HotelListPage: React.FC = () => {
       </div>
 
       {/* ✅ ส่ง hotels เข้า tabs */}
-      <HotelGalleryTabs hotels={filteredHotels} />
+      <div className="hotel-list">
+        {filteredHotels.map((hotel) => (
+          <HotelCard key={hotel.id} hotel={hotel} />
+        ))}
+      </div>
+
+      {/* <HotelGalleryTabs hotels={filteredHotels} /> */}
     </div>
   );
 };
