@@ -4,9 +4,10 @@ import { Hotel } from "../types/models";
 
 interface Props {
   hotel: Hotel;
+  onViewDetails?: (hotel: Hotel) => void;
 }
 
-const HotelCard: React.FC<Props> = ({ hotel }) => {
+const HotelCard: React.FC<Props> = ({ hotel, onViewDetails }) => {
   return (
     <div className="hotel-card">
       {/* ===== Image wrapper (hover zoom) ===== */}
@@ -30,7 +31,7 @@ const HotelCard: React.FC<Props> = ({ hotel }) => {
           {hotel.pricePerNight}/night
         </p>
 
-        <Link to={`/hotels/${hotel.id}`} className="btn-primary">
+        <Link to={`/hotels/${hotel.id}`} className="btn-primary" onClick={() => onViewDetails?.(hotel)}>
           View details
         </Link>
       </div>

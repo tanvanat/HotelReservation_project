@@ -1,4 +1,4 @@
-import { EventPayload, Hotel, VariantMetrics } from "../types/models";
+import { EventPayload, Hotel, TrackEventPayload, VariantMetrics } from "../types/models";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
@@ -53,4 +53,17 @@ export async function trackView(payload: Omit<EventPayload, "eventType">) {
 // ในโปรเจกต์นี้ยังไม่มี /api/bookings → ให้ createBooking = click_book
 export async function createBooking(payload: Omit<EventPayload, "eventType">) {
   return postEvent({ ...payload, eventType: "click_book" });
+}
+
+export async function postTrackEvent(payload: TrackEventPayload): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}/api/track-events`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    console.error("Failed to post track event:", text);
+  }
 }

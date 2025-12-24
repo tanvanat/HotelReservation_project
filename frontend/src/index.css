@@ -23,6 +23,13 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: visible;   /* 👈 เพิ่ม */
+} 
+.app-main {
+  padding: 32px 16px 64px;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: visible;   /* 👈 เพิ่ม */
 }
 
 .app-header {
@@ -52,13 +59,6 @@ body {
   color: #60a5fa;
   border-bottom: 2px solid #60a5fa;
 }
-
-.app-main {
-  padding: 32px 16px 64px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
 
 h1 {
   margin-bottom: 0.4rem;
@@ -100,9 +100,10 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1rem;
+  padding-top: 12px; /* ปรับได้ */
 
   /* ไม่ให้searchbarชนกับhotelcard*/
-  margin-top: 1.5rem;
+  /* margin-top: 1.5rem; */
 }
 
 
@@ -231,3 +232,46 @@ h1 {
 .search-btn:hover {
   background: #1f2937;
 }
+/* ===== Experiment: Search placement variants ===== */
+
+/* ===== Variant A: เมื่อ scroll แล้วให้ search "fixed" อยู่บนจอเสมอ ===== */
+.search-fixed {
+  position: fixed;
+  top: 68px;           /* เผื่อ header (ปรับได้) */
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  padding: 8px 0;
+}
+
+/* ให้ form อยู่กลางเหมือนเดิมตอน fixed */
+.search-fixed .search-form {
+  margin: 0 auto;
+}
+
+/* ก่อน scroll: ไม่มีกรอบ (ปล่อยตามเดิม) */
+.search-wrap .search-form {
+  transition: all 0.25s ease;
+}
+
+/* ตอน stuck: เปิดกรอบ/blur/shadow */
+.search-fixed.search-stuck .search-form {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
+}
+
+/* Variant B: ไม่ sticky */
+/* B: ไม่มีอะไร */
+.search-normal {
+  position: static;
+}
+
+/* A: centered */
+.search-centered {
+  justify-content: center;
+}
+

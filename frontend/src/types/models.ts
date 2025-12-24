@@ -22,3 +22,14 @@ export interface VariantMetrics {
   clicks: number;
   conversionRate: number;
 }
+
+export interface TrackEventPayload {
+  sessionId: string;
+  variant: Variant;
+  eventName: "SEARCH_TYPED" | "SEARCH_SUBMITTED" | "FIRST_HOTEL_CLICK";
+  keyword?: string;
+  source?: "enter" | "button";
+  keywordLength?: number;
+  hotelId?: number;
+  msToFirstClick?: number;
+}

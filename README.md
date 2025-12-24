@@ -94,3 +94,7 @@ link button (btn-primary)
 
 ## Run frontend/
     npm run dev
+
+# โค้ดในการเปลื่ยนvariantจากA->B
+    localStorage.setItem("triptweak_variant_searchbar", "B");
+    location.reload();
