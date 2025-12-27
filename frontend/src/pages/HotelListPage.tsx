@@ -2,10 +2,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { fetchHotels, postTrackEvent } from "../services/apiClient";
 import type { Hotel, TrackEventPayload } from "../types/models";
 import { useSessionId } from "../hooks/useSessionId";
-import { useSearchBarVariant } from "../hooks/useSearchBarVariant";
 import HotelCard from "../components/HotelCard";
+import { useGlobalVariant } from "../hooks/useGlobalVariant";
 
-const STICKY_THRESHOLD_PX = 80; // scroll เกินเท่านี้ค่อย "ลอย+มีกรอบ"
+const STICKY_THRESHOLD_PX = 80;
 
 const HotelListPage: React.FC = () => {
   const [hotels, setHotels] = useState<Hotel[]>([]);
@@ -14,16 +14,16 @@ const HotelListPage: React.FC = () => {
 
   const [search, setSearch] = useState("");
 
-  // ===== Experiment: session + variant =====
+  // ✅ session + global variant (ใช้ทั้งเว็บ)
   const sessionId = useSessionId();
-  const variant = useSearchBarVariant(); // "A" | "B"
+  const variant = useGlobalVariant(); // "A" | "B"
 
   // ===== Metrics refs =====
   const pageEnterAtRef = useRef<number>(Date.now());
   const firstHotelClickSentRef = useRef<boolean>(false);
   const typingTimerRef = useRef<number | null>(null);
 
-  // ===== Scroll state (สำหรับ variant A เท่านั้น) =====
+  // ===== Scroll state (เฉพาะ Variant A) =====
   const [isStuck, setIsStuck] = useState(false);
 
   // ===== Helper: safe tracking =====
@@ -44,18 +44,15 @@ const HotelListPage: React.FC = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // ===== Detect scroll: ทำให้ "ลอยบนจอตลอด" เฉพาะ Variant A =====
+  // ===== Detect scroll: fixed เฉพาะ Variant A =====
   useEffect(() => {
     if (variant !== "A") {
       setIsStuck(false);
       return;
     }
 
-    const onScroll = () => {
-      setIsStuck(window.scrollY > STICKY_THRESHOLD_PX);
-    };
-
-    onScroll(); // set ค่าเริ่มต้น
+    const onScroll = () => setIsStuck(window.scrollY > STICKY_THRESHOLD_PX);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [variant]);
@@ -75,7 +72,7 @@ const HotelListPage: React.FC = () => {
     }, 400);
   };
 
-  // ===== Search submitted (enter vs button) =====
+  // ===== Search submitted =====
   const onSubmitSearch = (source: "enter" | "button") => {
     const keyword = search.trim();
     track({
@@ -112,11 +109,8 @@ const HotelListPage: React.FC = () => {
   if (loading) return <p>Loading hotels...</p>;
   if (error) return <p className="error">{error}</p>;
 
-  // ===== Classes =====
-  // Variant A:
-  // - ก่อน scroll: centered (ปกติ)
-  // - หลัง scroll: fix บนจอตลอด + มีกรอบ/blur/shadow
-  // Variant B: normal + left
+  // A: centered + fixed after scroll
+  // B: left + normal
   const searchWrapClass =
     variant === "A"
       ? `search-wrap search-centered ${isStuck ? "search-fixed search-stuck" : ""}`
@@ -131,7 +125,6 @@ const HotelListPage: React.FC = () => {
           experiment in action.
         </p>
 
-        {/* ===== Search bar ===== */}
         <div className={searchWrapClass}>
           <form
             className="search-form"
@@ -175,9 +168,8 @@ const HotelListPage: React.FC = () => {
               </button>
             </div>
 
-            {/* Optional debug label */}
             <p className="subtitle" style={{ marginTop: 10, fontSize: 12 }}>
-              Experiment variant: <b>{variant}</b>
+              Global variant: <b>{variant}</b>
               {variant === "A" ? (
                 <>
                   {" "}
@@ -188,12 +180,9 @@ const HotelListPage: React.FC = () => {
           </form>
         </div>
 
-        <p className="subtitle">
-          96% guest satisfaction with 52,000+ nights booked
-        </p>
+        <p className="subtitle">96% guest satisfaction with 52,000+ nights booked</p>
       </div>
 
-      {/* ✅ Hotel cards grid (ยังเป็น 2x2 ตามเดิม ไม่เปลี่ยน) */}
       <div className="hotel-grid">
         {filteredHotels.map((h) => (
           <HotelCard key={h.id} hotel={h} onViewDetails={onFirstHotelClick} />

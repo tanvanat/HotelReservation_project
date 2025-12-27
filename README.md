@@ -40,6 +40,23 @@
 ## 5.run backend-booking-api
     gradlew.bat bootRun
 
+## 6.urlเข้า h2 database
+    JDBC URL: jdbc:h2:mem:bookingdb
+    ตามที่เราสร้าง h2 databaseจาก backend-booking-api\src\main\resources\application.yaml
+    URL: http://localhost:8080/h2-console
+
+## 7. run Postgres
+    docker compose up -d
+    docker ps
+    $env:SPRING_PROFILES_ACTIVE="postgres"
+    ./gradlew bootRun
+
+## 8.ดูlog Postgres
+    jdbc:postgresql://localhost:5432/bookingdb
+    ลอง stop backend แล้ว start ใหม่ (ข้อมูลควร “ยังอยู่”)
+    H2 mem จะหายเมื่อ restart
+    Postgres จะไม่หาย → นี่คือ proof ว่า prod-like จริง
+
 
 
 # ขั้นตอนการสร้าง Frontend/
@@ -98,3 +115,14 @@ link button (btn-primary)
 # โค้ดในการเปลื่ยนvariantจากA->B
     localStorage.setItem("triptweak_variant_searchbar", "B");
     location.reload();
+
+    localStorage.setItem("triptweak_exp_book_cta_variant","A");
+    location.reload();
+
+    localStorage.setItem("triptweak_global_variant", "A");
+    location.reload();
+
+## ให้สุ่มใหม่
+    localStorage.removeItem("triptweak_global_variant");
+    location.reload();
+

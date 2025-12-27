@@ -32,11 +32,20 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.h2database:h2")
+
+	// Databases
+	developmentOnly("com.h2database:h2")                 // Default / Dev
+	runtimeOnly("org.postgresql:postgresql")         // Production-like
+	/* 
+	ทำไมต้องเป็นruntimeOnlyเพราะ
+	Spring Boot auto-config datasource ตอน runtime
+	เราไม่อยากผูก code กับ database ใดdatabaseหนึ่ง สลับDBด้วยprofileได้ (H2 ↔ Postgres)
+	*/
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
+
 
 kotlin {
 	compilerOptions {
