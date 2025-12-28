@@ -113,16 +113,19 @@ link button (btn-primary)
     npm run dev
 
 # โค้ดในการเปลื่ยนvariantจากA->B
-    localStorage.setItem("triptweak_variant_searchbar", "B");
+    <!-- localStorage.setItem("triptweak_variant_searchbar", "B");
     location.reload();
 
     localStorage.setItem("triptweak_exp_book_cta_variant","A");
-    location.reload();
+    location.reload(); -->
 
     localStorage.setItem("triptweak_global_variant", "A");
     location.reload();
 
 ## ให้สุ่มใหม่
-    localStorage.removeItem("triptweak_global_variant");
+    localStorage.removeItem("triptweak_exp_global_variant");
     location.reload();
+
+
+
 

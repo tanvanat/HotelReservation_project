@@ -275,3 +275,89 @@ h1 {
   justify-content: center;
 }
 
+/* ===== Floating Variant Switch (center-left) ===== */
+.variant-float {
+  position: fixed;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99999;
+}
+
+/* glass card คล้าย search bar */
+.variant-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 231, 235, 0.9);
+  border-radius: 16px;
+  padding: 10px 10px 8px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
+  width: 132px;
+}
+
+/* title */
+.variant-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+/* segmented container */
+.variant-segment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 14px;
+  background: rgba(17, 24, 39, 0.06);
+  border: 1px solid rgba(229, 231, 235, 0.85);
+}
+
+/* buttons */
+.variant-btn {
+  height: 34px;
+  border: 1px solid rgba(209, 213, 219, 0.95);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #111827;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.variant-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.10);
+}
+
+/* active styles */
+.variant-btn.is-active {
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+/* A active: blue vibe */
+.variant-btn.is-active.is-a {
+  background: #2563eb;
+}
+
+/* B active: green vibe */
+.variant-btn.is-active.is-b {
+  background: #16a34a;
+}
+
+/* footer */
+.variant-sub {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.variant-sub-strong {
+  color: #111827;
+  font-weight: 700;
+}
