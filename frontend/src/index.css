@@ -361,3 +361,70 @@ h1 {
   color: #111827;
   font-weight: 700;
 }
+
+/* ในไฟล์ CSS global หรือ Tailwind config */
+
+/* Variant A - Simple, clean design */
+.hotel-card.variant-a {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.hotel-card.variant-a:hover {
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
+}
+
+/* Variant B - Persuasive, premium design */
+.hotel-card.variant-b {
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.1);
+}
+
+.hotel-card.variant-b:hover {
+  box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Grid layouts */
+.hotel-grid-a {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 20px;
+}
+
+.hotel-grid-b {
+  padding: 20px;
+}
+
+.hotel-grid-b .grid {
+  gap: 30px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hotel-grid-a {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .hotel-grid-b .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Animation for switching variants */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hotel-card {
+  animation: fadeIn 0.5s ease-out;
+}

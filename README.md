@@ -126,8 +126,9 @@ link button (btn-primary)
     localStorage.removeItem("triptweak_exp_global_variant");
     location.reload();
 
+## ดูว่าตอนนี้ใช้variantอะไรอยุ่
 
-
+localStorage.getItem("triptweak_exp_global_variant")
 
 Backend REST API    → http://localhost:8080/api/hotels
 Health Check        → http://localhost:8080/actuator/health
@@ -135,3 +136,7 @@ GraphQL Playground  → http://localhost:8080/graphiql
 H2 URL              → http://localhost:8080/h2-console
 FrontEnd URL        → http://localhost:5173/
 
+## Large Scale Thinking
+    ถ้า traffic โต 100x จะทำอะไร
+    ถ้า event เยอะมากจะ scale ยังไง
+    ถ้า tracking ช้าจะส่ง async ยังไง
