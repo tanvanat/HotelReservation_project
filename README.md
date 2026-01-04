@@ -49,7 +49,10 @@
     docker compose up -d
     docker ps
     $env:SPRING_PROFILES_ACTIVE="postgres"
-    ./gradlew bootRun
+
+    เมื่อมีcontainerเเล้วใช้วิธีนี้ตลอด:
+    กดรันdockerจากในdocker desktop containerชื่อ->abtestingbookingui
+    เเล้วค่อยรัน./gradlew bootRun
 
 ## 8.ดูlog Postgres
     jdbc:postgresql://localhost:5432/bookingdb
@@ -136,7 +139,16 @@ GraphQL Playground  → http://localhost:8080/graphiql
 H2 URL              → http://localhost:8080/h2-console
 FrontEnd URL        → http://localhost:5173/
 
+## Testing
+    เราใช้postmanเพื่อทดสอบapi
+    GET: http://localhost:8080/api/hotels/1 
+    POST: http://localhost:8080/graphql
+
+## วิธี Deploy Project ไป Production
+    Vercel (Frontend) + Railway (Backend)
+
 ## Large Scale Thinking
     ถ้า traffic โต 100x จะทำอะไร
     ถ้า event เยอะมากจะ scale ยังไง
     ถ้า tracking ช้าจะส่ง async ยังไง
+
