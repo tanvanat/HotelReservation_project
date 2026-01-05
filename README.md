@@ -153,3 +153,5 @@ FrontEnd URL        → http://localhost:5173/
     ถ้า event เยอะมากจะ scale ยังไง
     ถ้า tracking ช้าจะส่ง async ยังไง
 
+## video
+<video src="Hotel-booking website.mp4" width="550" height="250" controls></video>
