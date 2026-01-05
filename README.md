@@ -146,7 +146,8 @@ FrontEnd URL        → http://localhost:5173/
 
 ## วิธี Deploy Project ไป Production
     Vercel (Frontend) + Railway (Backend)
-
+    https://vercel.com/tanvanats-projects/hotelreservation_frontend/settings/domains
+    https://railway.com/project/c85bb004-c6f9-405f-beb0-1f8353218a11?environmentId=345e7e4e-f724-4b28-883e-e5fd2bbc902b
 ## Large Scale Thinking
     ถ้า traffic โต 100x จะทำอะไร
     ถ้า event เยอะมากจะ scale ยังไง
