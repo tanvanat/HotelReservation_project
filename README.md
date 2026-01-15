@@ -1,16 +1,16 @@
-# ขั้นตอนการสร้าง backend-booking-api/
+# Step to build backend-booking-api/
 
-## 1.สร้างgradle wrapper
+## 1.build gradle wrapper
     use spring initailizr to generate the base folder (with gradlew already included)
 
 ## 2.install Java JDK 21
 
-## 3.ไฟล์ที่ต้องสร้างมือเอง
+## 3.files that have to create by hands
     build.gradle.kts
     settings.gradle.kts
     src/
 
-## 4.รายละเอียดไฟล์
+## 4.details of each folder
     4.1.config/
     โหลดdatabaseไว้ก่อนตอนเปิดเเอป
 
@@ -40,7 +40,7 @@
 ## 5.run backend-booking-api
     gradlew.bat bootRun
 
-## 6.urlเข้า h2 database
+## 6.url for h2 database
     JDBC URL: jdbc:h2:mem:bookingdb
     ตามที่เราสร้าง h2 databaseจาก backend-booking-api\src\main\resources\application.yaml
     URL: http://localhost:8080/h2-console
@@ -54,15 +54,13 @@
     กดรันdockerจากในdocker desktop containerชื่อ->abtestingbookingui
     เเล้วค่อยรัน./gradlew bootRun
 
-## 8.ดูlog Postgres
+## 8.log of Postgres
     jdbc:postgresql://localhost:5432/bookingdb
     ลอง stop backend แล้ว start ใหม่ (ข้อมูลควร “ยังอยู่”)
     H2 mem จะหายเมื่อ restart
     Postgres จะไม่หาย → นี่คือ proof ว่า prod-like จริง
 
-
-
-# ขั้นตอนการสร้าง Frontend/
+# steps to build Frontend/
 
 ## 1.src/main.tsx
 React start here
@@ -70,7 +68,7 @@ React start here
 ## 2.src/App.tsx
 
 ## 3.src/components/Layout.tsx
-layoutพื้นฐานต่างๆ
+basics layout
 
 - add a max-width container
 - change header style
@@ -106,16 +104,10 @@ link button (btn-primary)
 
 ## 9.src/pages/AdminDashboardPage.tsx
 
-เราสามารถเเต่งให้tableสวยกว่านี้:
-- rounded container card
-- striped rows
-- sticky header
-
-
 ## Run frontend/
     npm run dev
 
-# โค้ดในการเปลื่ยนvariantจากA->B
+# code to change variant A->B
     <!-- localStorage.setItem("triptweak_variant_searchbar", "B");
     location.reload();
 
@@ -125,11 +117,11 @@ link button (btn-primary)
     localStorage.setItem("triptweak_global_variant", "A");
     location.reload();
 
-## ให้สุ่มใหม่
+## random again
     localStorage.removeItem("triptweak_exp_global_variant");
     location.reload();
 
-## ดูว่าตอนนี้ใช้variantอะไรอยุ่
+## cmd to see the current variant
 
 localStorage.getItem("triptweak_exp_global_variant")
 
@@ -140,18 +132,14 @@ H2 URL              → http://localhost:8080/h2-console
 FrontEnd URL        → http://localhost:5173/
 
 ## Testing
-    เราใช้postmanเพื่อทดสอบapi
+    use postman to test api
     GET: http://localhost:8080/api/hotels/1 
     POST: http://localhost:8080/graphql
 
-## วิธี Deploy Project ไป Production
+## How to Deploy Project into Production
     Vercel (Frontend) + Railway (Backend)
     https://vercel.com/tanvanats-projects/hotelreservation_frontend/settings/domains
     https://railway.com/project/c85bb004-c6f9-405f-beb0-1f8353218a11?environmentId=345e7e4e-f724-4b28-883e-e5fd2bbc902b
-## Large Scale Thinking
-    ถ้า traffic โต 100x จะทำอะไร
-    ถ้า event เยอะมากจะ scale ยังไง
-    ถ้า tracking ช้าจะส่ง async ยังไง
 
 ## video
 <video src="Hotel-booking website.mp4" width="550" height="250" controls></video>
